@@ -7,7 +7,6 @@ from sklearn.decomposition import PCA
 from PIL import Image
 import datetime
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
 
 #Parse arguments
 par = argparse.ArgumentParser()
