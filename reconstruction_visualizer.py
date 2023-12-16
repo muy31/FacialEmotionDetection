@@ -76,9 +76,21 @@ def encode_image(img, pca):
     transformed_image = pca.transform(img)
     return transformed_image
 
+def shape_transformed_data(data, n_features):
+    if data.shape[1] > n_features:
+        #Our pca had too many features trim our data (take first n)
+        data = data[:, 0:n_features]
+        
+    elif data.shape[1] < n_features:
+        #We need to pad our data with zeros
+        data = np.pad(data, [(0, 0), (0, n_features - data.shape[1])], mode = 'constant')
+
+    return data
+
 def inferImage(img, pca, model):
     img = img.flatten().reshape(1, -1)
     expressed_img = pca.transform(img)
+    expressed_img = shape_transformed_data(expressed_img, model.n_features_in_)
     return model.predict(expressed_img)
 
 #Run inference on all images
