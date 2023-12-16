@@ -7,6 +7,7 @@ from sklearn.decomposition import PCA
 from PIL import Image
 import datetime
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 
 #Parse arguments
 par = argparse.ArgumentParser()
@@ -59,11 +60,6 @@ def reconstruct_image(transformed_image, pca):
 def encode_image(image, pca, debug = False):
     #Run principal component analysis
     transformed_image = pca.transform(image)
-
-    if debug:
-        Image.fromarray(image.reshape(48, 48)).show()
-        Image.fromarray(reconstruct_image(transformed_image, pca).reshape(48, 48)).show()
-
     return transformed_image.flatten().astype(float)
 
 def visualize_data(pca, transformed_data, chosen_feature_index = (0, 1), labels = None, save = True, saveId = ''):
@@ -129,7 +125,7 @@ def shape_transformed_data(data, n_features):
         
     elif data.shape[1] < n_features:
         #We need to pad our data
-        np.pad(data, [(0, 0), (0, 1)], mode = 'constant')
+        data = np.pad(data, [(0, 0), (0, n_features - data.shape[1])], mode = 'constant')
 
     print(data.shape[1])
     return data
