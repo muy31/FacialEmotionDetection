@@ -4,4 +4,6 @@ A framework for classifying images utilizing principal component analysis for co
 
 To use, download or pull repo. Attach a dataset of images for which every image is located in a folder corresponding to its intended classification. I utilized the dataset found here: https://www.kaggle.com/datasets/jonathanoheix/face-expression-recognition-dataset/.
 
-Import all dependencies. **pip install requirements.txts**
+Import all dependencies. **pip install requirements.txt**
+
+
